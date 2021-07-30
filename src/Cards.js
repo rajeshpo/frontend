@@ -27,7 +27,7 @@ export default function Cards({ name, age, city, country,sex, id }) {
            }
 console.log(gender);
   const deleteData = () => {
-    Axios.post("http://localhost:5000/deleteUser", { _id: id }).then((res) =>
+    Axios.post("https://crudops.herokuapp.com/deleteUser", { _id: id }).then((res) =>
       window.location.reload()
     );
   };
@@ -41,15 +41,15 @@ console.log(gender);
       sex:gender,
       _id: id,
     };
-    Axios.post("http://localhost:5000/update", data).then((res) => {
+    Axios.post("https://crudops.herokuapp.com/update", data).then((res) => {
       window.location.reload();
     });
-  };
+  };  
 
   return (
     <tr>
     <td> {update ? (
-          <input className="updates" value={name1} onChange={(e) => setName(e.target.value)} />
+          <input className="updates" value={name1} autofocus onChange={(e) => setName(e.target.value)} />
         ) : (
           name1
         )}</td>
@@ -71,7 +71,7 @@ console.log(gender);
         ) : (
           country1
         )}</td>
-      <td> {update ? <Select options={countryList} onChange={Sex}></Select> : (
+      <td> {update ? <Select options={countryList} defaultValue={countryList[0]} onChange={Sex}></Select> : (
           sex1
         )}</td>
       

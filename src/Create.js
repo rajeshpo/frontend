@@ -43,7 +43,8 @@ const Sex=(e)=>{
 }
 console.log(sex1);
 
-  const postData = () => {
+  const postData = (e) => {
+    e.preventDefault();
     const data = {
       name: name1,
       age: age1,
@@ -51,9 +52,14 @@ console.log(sex1);
       country: country1,
       sex:sex1
     };
-    Axios.post("http://localhost:5000/create", data).then((res) => {
+    Axios.post("https://crudops.herokuapp.com/create", data).then((res) => {
       window.location.reload();
-    });
+    },(error)=>{
+      console.log(error)
+    }).catch(error=>{
+console.log(error)
+    })
+
   };
  
 
@@ -63,26 +69,26 @@ console.log(sex1);
        <form>
    <div className="form-group">
      <label>Name</label>
-     <input type="text" value={name1} onChange={(e)=>setName(e.target.value)}  className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Name" />
+     <input type="text" value={name1} onChange={(e)=>setName(e.target.value)} required  className="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Name" />
     
    </div>
    <div className="form-group">
      <label>Age</label>
-     <input type="Number" value={age1}  onChange={(e)=>setAge(e.target.value)} className="form-control" id="age" placeholder="Enter your Age"/>
+     <input type="Number" value={age1}  onChange={(e)=>setAge(e.target.value)} required className="form-control" id="age" placeholder="Enter your Age"/>
    </div>
    <div className="form-group">
    <label>City</label>
-     <input type="text" value={city1}  onChange={(e)=>setCity(e.target.value)} className="form-control" id="city" placeholder="Enter your City"/>
+     <input type="text" value={city1}  onChange={(e)=>setCity(e.target.value)} required className="form-control" id="city" placeholder="Enter your City"/>
    </div>
    <div className="form-group">
    <label>Country</label>
-     <input type="text"  value={country1} onChange={(e)=>setCountry(e.target.value)} className="form-control" id="country" placeholder="Enter your Country"/>
+     <input type="text"  value={country1} onChange={(e)=>setCountry(e.target.value)} required className="form-control" id="country" placeholder="Enter your Country"/>
    </div>
    <div className="form-group">
    <label>Sex</label>
-   <Select options={countryList} onChange={Sex}></Select>
+   <Select options={countryList} required onChange={Sex}></Select>
    </div>
-   <button type="submit" className="btn btn-primary" onClick={()=>{postData()}}>Submit</button>
+   <button type="submit" className="btn btn-primary" onClick={(e)=>{postData(e)}}>Submit</button>
   
  </form>
     </div>

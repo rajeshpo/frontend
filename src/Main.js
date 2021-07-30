@@ -9,7 +9,7 @@ export default function Main(){
   const [data, setData] = useState([]);
   const [search,setSearch]=useState("")
   useEffect(() => {
-    Axios.get("http://localhost:5000/getUsers").then((res) => setData(res.data));
+    Axios.get("https://crudops.herokuapp.com/getUsers").then((res) => setData(res.data));
   }, []);
  
 const filteredUsers=data.filter(user=>{
